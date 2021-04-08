@@ -1,9 +1,10 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {Box, Button, FormControl, IconButton, TextField} from '@material-ui/core';
 import {AddBox} from '@material-ui/icons';
+import {TaskType} from "./api/todolists-api";
 
 type AddItemFormPropsType = {
-    addItem: (title: string) => void
+    addItem: (task: TaskType) => void
 }
 
 export const AddItemForm = React.memo(function(props: AddItemFormPropsType) {
