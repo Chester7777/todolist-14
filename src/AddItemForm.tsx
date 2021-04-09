@@ -4,7 +4,7 @@ import {AddBox} from '@material-ui/icons';
 import {TaskType} from "./api/todolists-api";
 
 type AddItemFormPropsType = {
-    addItem: (task: TaskType) => void
+    addItem: (title: string) => void
 }
 
 export const AddItemForm = React.memo(function(props: AddItemFormPropsType) {

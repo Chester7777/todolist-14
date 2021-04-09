@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {FilterValuesType} from "../state/todolists-reducer";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
@@ -11,6 +12,7 @@ const instance = axios.create({
 export type TodolistType = {
     id: string
     title: string
+    filter: FilterValuesType
     addedDate: string
     order: number
 }
@@ -48,7 +50,7 @@ export type TaskType = {
     addedDate: string
 }
 
-type UpdateTaskModelType = {
+export type UpdateTaskModelType = {
     title: string
     description: string
     status: number
