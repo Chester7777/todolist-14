@@ -88,21 +88,21 @@ export const changeTodolistFilterAC = (id: string, filter: FilterValuesType): Ch
 export const setTodolistAC = (todos: Array<TodolistType>) => ({type: "SET-TODOS", todos} as const)
 type SetTodoListsActionType = ReturnType<typeof setTodolistAC>
 
-export const fetchTodoListsTC = () => (dispatch: Dispatch, getState: ()=> AppRootStateType): void => {
+export const fetchTodoListsTC = () => (dispatch: Dispatch<SetTodoListsActionType>, getState: ()=> AppRootStateType): void => {
     todolistsAPI.getTodolists()
         .then(res => {
             const todos = res.data
             dispatch(setTodolistAC(todos))
         })
 }
-export const postTodoListTC = (title: string) => (dispatch: Dispatch) => {
+export const postTodoListTC = (title: string) => (dispatch: Dispatch<AddTodolistActionType>) => {
     todolistsAPI.createTodolist(title)
         .then((res) => {
             const todo = res.data.data.item
 dispatch(addTodolistAC(todo))
         })
 }
-export const deleteTodoListTC = (todolistId: string) => (dispatch: Dispatch) => {
+export const deleteTodoListTC = (todolistId: string) => (dispatch: Dispatch<RemoveTodolistActionType>) => {
     todolistsAPI.deleteTodolist(todolistId)
         .then((res) => {
             dispatch(removeTodolistAC(todolistId))

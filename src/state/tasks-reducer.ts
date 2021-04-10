@@ -167,21 +167,21 @@ export const setTasksAC = (tasks: Array<TaskType>, todoId: string): SetTasksActi
 } as const)
 
 
-export const fetchTasksTC = (todoId: string) => (dispatch: Dispatch) => {
+export const fetchTasksTC = (todoId: string) => (dispatch: Dispatch<SetTasksActionType>) => {
     todolistsAPI.getTasks(todoId)
         .then((res) => {
             const tasks = res.data.items
             dispatch(setTasksAC(tasks, todoId))
         })
 }
-export const deleteTasksTC = (todoId: string, id: string) => (dispatch: Dispatch) => {
+export const deleteTasksTC = (todoId: string, id: string) => (dispatch: Dispatch<RemoveTaskActionType>) => {
     todolistsAPI.deleteTask(todoId, id)
         .then((res) => {
             dispatch(deleteTaskAC(todoId, id))
         })
 }
 
-export const addTaskTC = (title: string, todoId: string) => (dispatch: Dispatch) => {
+export const addTaskTC = (title: string, todoId: string) => (dispatch: Dispatch<AddTaskActionType>) => {
     todolistsAPI.createTask(title, todoId)
         .then(res => {
             const task = res.data.data.item
@@ -189,7 +189,7 @@ export const addTaskTC = (title: string, todoId: string) => (dispatch: Dispatch)
         })
 }
 
-export const updateTaskStatusTC = (todoId: string, taskId: string, status: TaskStatuses) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
+export const updateTaskStatusTC = (todoId: string, taskId: string, status: TaskStatuses) => (dispatch: Dispatch<ChangeTaskStatusActionType>, getState: () => AppRootStateType) => {
     const state = getState()
     const allAppTasks = state.tasks
     const tasksForCurrentTodo = allAppTasks[todoId]
@@ -213,7 +213,7 @@ export const updateTaskStatusTC = (todoId: string, taskId: string, status: TaskS
             })
     }
 }
-export const updateTaskTitleTC = (todolistId: string, taskId: string, title: string) => (dispatch: Dispatch, getState: () => AppRootStateType ) => {
+export const updateTaskTitleTC = (todolistId: string, taskId: string, title: string) => (dispatch: Dispatch<ChangeTaskTitleActionType>, getState: () => AppRootStateType ) => {
     todolistsAPI.updateTask(todolistId, taskId, model)
         .then(res => {
             // const title = res.data.data.title
